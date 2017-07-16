@@ -2,6 +2,7 @@
 
 ## Blocmarks: An  application that allows a user to bookmark URLs via email, peruse other user's bookmarks and maintain a personal index of categorized bookmarks.
 
+## Application uses mailcatcher - as advised not add into the Gemfile as it will conflict with the applications gems.
 Things you may want to cover:
 
 * Ruby version
