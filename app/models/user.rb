@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :topics
+
       #  user = User.new(user_attrs)
       #  user.skip_confirmation!
       #  user.save!
