@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new
+    @topic = Topic.new(topic_params)
     @topic.title = params[:topic][:title]
     @topic.user = current_user
 
@@ -25,22 +25,22 @@ class TopicsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @topic = Topic.find(params[:id])
-  # end
-  #
-  # def update
-  #   @topic = Topic.find(params[:id])
-  #   @topic.title = params[:topic][:title]
-  #
-  #   if @topic.save
-  #     flash[:alert] = "Topic was updated"
-  #     redirect_to @topic
-  #   else
-  #     flash.now[:alert] = "An error occured updating the topic.  Please try again."
-  #     render :edit
-  #   end
-  # end
+  def edit
+    @topic = Topic.find(params[:id])
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+    @topic.assign_attributes(topic_params)
+
+    if @topic.save
+      flash[:alert] = "Topic was updated"
+      redirect_to @topic
+    else
+      flash.now[:alert] = "An error occured updating the topic.  Please try again."
+      render :edit
+    end
+  end
 
   def destroy
     @topic = Topic.find(params[:id])
@@ -52,6 +52,11 @@ class TopicsController < ApplicationController
        flash.now[:alert] = "There was an error deleting the topic."
        render :show
      end
+  end
+  private
+
+  def topic_params
+    params.require(:topic).permit(:title, :user)
   end
 
 end

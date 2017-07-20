@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :topics
+  has_many :bookmarks, dependent: :destroy
 
       #  user = User.new(user_attrs)
       #  user.skip_confirmation!
